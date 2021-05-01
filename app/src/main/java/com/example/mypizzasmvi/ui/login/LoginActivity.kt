@@ -7,6 +7,7 @@ import androidx.navigation.fragment.NavHostFragment
 import com.example.mypizzasmvi.R
 import org.koin.core.context.loadKoinModules
 import org.koin.core.context.unloadKoinModules
+import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 class LoginActivity : AppCompatActivity() {
@@ -22,7 +23,8 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun setupNavigationController(bundle: Bundle?) {
-        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_login) as NavHostFragment
+        val navHostFragment = supportFragmentManager
+            .findFragmentById(R.id.nav_host_login) as NavHostFragment
         navController = navHostFragment.navController
         navController.setGraph(R.navigation.login_nav_graph, bundle)
     }
@@ -33,12 +35,8 @@ class LoginActivity : AppCompatActivity() {
     }
 
     companion object {
-
         val module = module(override = true) {
-            single {
-//                viewModel { PixPasteViewModel(get()) }
-            }
+            viewModel { LoginViewModel(get()) }
         }
-
     }
 }
