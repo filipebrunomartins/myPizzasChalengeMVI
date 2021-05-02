@@ -10,7 +10,7 @@ interface ConnectionChecker {
     fun isConnected(): Boolean
 }
 
-class ConnectionCheckerImpl(val context: Context): ConnectionChecker {
+class ConnectionCheckerImpl(private val context: Context): ConnectionChecker {
     @Synchronized override fun isConnected(): Boolean {
         val manager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val request = NetworkRequest.Builder().build()

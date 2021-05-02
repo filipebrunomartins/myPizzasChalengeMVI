@@ -5,9 +5,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.example.mypizzasmvi.R
+import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.context.loadKoinModules
 import org.koin.core.context.unloadKoinModules
-import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 class LoginActivity : AppCompatActivity() {

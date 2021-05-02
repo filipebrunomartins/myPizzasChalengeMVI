@@ -18,7 +18,8 @@
         <activity
             android:name=".ui.login.LoginActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.MyPizzasMvi.ActivityNoActionBar">
+            android:theme="@style/Theme.MyPizzasMvi.ActivityDefault"
+            android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
