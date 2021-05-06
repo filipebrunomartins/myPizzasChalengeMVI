@@ -9,4 +9,8 @@
     <string name="hint_user">Usuário</string>
     <string name="hint_password">Senha</string>
     <string name="text_button_login">Entrar</string>
+
+    <!-- List Pizza-->
+    <string name="filter_hint">Procurar</string>
+    <string name="text_choose_flavor">Escolha seu sabor</string>
 </resources>

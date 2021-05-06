@@ -9,8 +9,8 @@ data class PizzaModel(
     @SerializedName("id") val id: String,
     @SerializedName("name") val name: String,
     @SerializedName("imageUrl") val imageUrl: String,
-    @SerializedName("rating") val rating: Int,
-    @SerializedName("priceP") val priceP: Int,
-    @SerializedName("priceM") val priceM: Int,
-    @SerializedName("priceG") val priceG: Int
+    @SerializedName("rating") val rating: Float,
+    @SerializedName("priceP") val priceP: Double,
+    @SerializedName("priceM") val priceM: Double,
+    @SerializedName("priceG") val priceG: Double
 ) : Parcelable

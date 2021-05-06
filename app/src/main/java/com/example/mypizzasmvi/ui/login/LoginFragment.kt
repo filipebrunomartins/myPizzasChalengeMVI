@@ -1,5 +1,6 @@
 package com.example.mypizzasmvi.ui.login
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,12 +13,13 @@ import com.example.mypizzasmvi.core.models.LoginResponse
 import com.example.mypizzasmvi.core.utils.lockScreen
 import com.example.mypizzasmvi.core.utils.setOnSingleClickListener
 import com.example.mypizzasmvi.core.utils.showMessageError
+import com.example.mypizzasmvi.ui.home.HomeActivity
 import kotlinx.android.synthetic.main.fragment_login.*
-import org.koin.androidx.viewmodel.ext.android.stateViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class LoginFragment : MviStateFragment<LoginState>() {
 
-    override val viewModel: LoginViewModel by stateViewModel()
+    override val viewModel: LoginViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -72,8 +74,10 @@ class LoginFragment : MviStateFragment<LoginState>() {
 
     private fun renderSuccess(loginResponse: LoginResponse){
         hidingLoading()
-        //TODO startActivity Home
+        //TODO tratar token
         loginResponse
+        val intent = Intent(requireContext(), HomeActivity::class.java)
+        startActivity(intent)
     }
 
     private fun showLoading(){

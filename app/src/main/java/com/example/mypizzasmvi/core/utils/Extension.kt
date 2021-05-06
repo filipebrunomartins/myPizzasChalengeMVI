@@ -13,6 +13,8 @@ import androidx.lifecycle.MediatorLiveData
 import com.example.mypizzasmvi.R
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import kotlinx.android.synthetic.main.layout_dialog_error.*
+import java.text.NumberFormat
+import java.util.*
 
 fun <FirstParameterType, SecondParameterType, ReturnType> combineLatest(
     first: LiveData<FirstParameterType>,
@@ -130,6 +132,14 @@ fun Fragment.lockScreen(lockScreen: Boolean) {
         window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE)
     }
 }
+
+fun Double.toMoneyFormat(): String {
+    val value =
+        NumberFormat.getCurrencyInstance(MONETARY_DEFAULT_LOCALE).format(this).split('$')[1].trim()
+    return "R$ $value"
+}
+
+private val MONETARY_DEFAULT_LOCALE = Locale("pt", "BR")
 
 data class DialogModel(
     val title: String = "Atenção!",

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/home_nav_graph"
+    app:startDestination="@id/pizzaListFragment"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <fragment
+        android:id="@+id/pizzaListFragment"
+        android:name="com.example.mypizzasmvi.ui.home.pizzaList.PizzaListFragment"
+        tools:layout="@layout/fragment_list_pizza"
+        android:label="PizzaListFragment" />
+</navigation>
