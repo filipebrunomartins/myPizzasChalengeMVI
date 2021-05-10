@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mvi.MviStateFragment
 import com.example.mypizzasmvi.R
 import com.example.mypizzasmvi.core.models.PizzaModel
+import com.example.mypizzasmvi.core.utils.showMessageError
 import kotlinx.android.synthetic.main.fragment_list_pizza.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -32,10 +33,7 @@ class PizzaListFragment: MviStateFragment<PizzaListState>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        editTextSearchPizza.addTextChangedListener{
-            try { adapter.filter(it.toString())
-            }catch (e : Exception){ e.printStackTrace() }
-        }
+        setupObservers()
     }
 
     override fun fetch() {
@@ -48,6 +46,13 @@ class PizzaListFragment: MviStateFragment<PizzaListState>() {
         is PizzaListState.Error -> renderError(state.message)
         is PizzaListState.Success -> renderSuccess(state.listPizza)
         is PizzaListState.Loading -> showLoading()
+    }
+
+    private fun setupObservers(){
+        editTextSearchPizza.addTextChangedListener{
+            try { adapter.filter(it.toString())
+            }catch (e : Exception){ e.printStackTrace() }
+        }
     }
 
     private fun showLoading() {
@@ -69,11 +74,17 @@ class PizzaListFragment: MviStateFragment<PizzaListState>() {
     }
 
     private fun renderError(message: String) {
-        //TODO TRATAR ERRO LISTA VAZIA OU ERRO
+        //TODO TRATAR ERRO LISTA VAZIA
         hideLoading()
+        showMessageError(message, getString(R.string.attention_text))
     }
 
     private fun navigateDetailsPizza(pizza: PizzaModel) {
+        try {
+            navigation.navigate(PizzaListFragmentDirections.actionPizzaListFragmentToPizzaDetailsFragment(pizza))
+        }catch (e : Exception){
+            e.printStackTrace()
+        }
     }
 
 }

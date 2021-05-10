@@ -4,6 +4,8 @@ plugins {
     id 'kotlin-android-extensions'
 }
 
+apply plugin: "androidx.navigation.safeargs.kotlin"
+
 android {
     compileSdkVersion 30
     buildToolsVersion "30.0.3"
@@ -62,6 +64,9 @@ dependencies {
 
     //AppCompat
     implementation 'androidx.appcompat:appcompat:1.2.0'
+
+    //Picasso
+    implementation 'com.squareup.picasso:picasso:2.71828'
 
     //Navigation
     implementation 'androidx.navigation:navigation-fragment-ktx:2.3.3'

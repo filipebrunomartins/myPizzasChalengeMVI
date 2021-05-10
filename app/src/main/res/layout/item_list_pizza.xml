@@ -20,8 +20,10 @@
 
         <ImageView
             android:id="@+id/imageViewPizza"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            tools:src="@drawable/pizza_example_1"
+            android:scaleType="centerCrop"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/guideline_one"
             app:layout_constraintStart_toStartOf="parent"

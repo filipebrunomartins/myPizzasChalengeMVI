@@ -9,5 +9,18 @@
         android:id="@+id/pizzaListFragment"
         android:name="com.example.mypizzasmvi.ui.home.pizzaList.PizzaListFragment"
         tools:layout="@layout/fragment_list_pizza"
-        android:label="PizzaListFragment" />
+        android:label="PizzaListFragment" >
+        <action
+            android:id="@+id/action_pizzaListFragment_to_pizzaDetailsFragment"
+            app:destination="@id/pizzaDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/pizzaDetailsFragment"
+        android:name="com.example.mypizzasmvi.ui.home.pizzaDetails.PizzaDetailsFragment"
+        tools:layout="@layout/fragment_details_pizza"
+        android:label="PizzaDetailsFragment" >
+        <argument
+            android:name="pizzaModel"
+            app:argType="com.example.mypizzasmvi.core.models.PizzaModel" />
+    </fragment>
 </navigation>

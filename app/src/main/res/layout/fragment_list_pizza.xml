@@ -52,6 +52,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtChooseFlavor"
         android:visibility="gone"
+        tools:visibility="visible"
         android:paddingBottom="8dp"
         tools:itemCount="6"
         tools:listitem="@layout/item_list_pizza" />

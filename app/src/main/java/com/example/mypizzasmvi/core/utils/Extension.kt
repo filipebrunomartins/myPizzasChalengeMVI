@@ -6,12 +6,14 @@ import android.graphics.drawable.Drawable
 import android.view.View
 import android.view.Window
 import android.view.WindowManager
+import android.widget.ImageView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import com.example.mypizzasmvi.R
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.layout_dialog_error.*
 import java.text.NumberFormat
 import java.util.*
@@ -53,6 +55,14 @@ fun Fragment.showMessageError(
         dialogData = DialogModel(title, message, textButton),
         onClickButton = onClickButton,
         onClose = onClose, onFinish = onFinish)
+}
+
+fun loadImage(imageURL : String,imageView: ImageView){
+    Picasso.get()
+        .load(imageURL)
+        .placeholder(R.drawable.ic_serch_image)
+        .error(R.drawable.ic_error_image)
+        .into(imageView)
 }
 
 fun openBottomDialog(

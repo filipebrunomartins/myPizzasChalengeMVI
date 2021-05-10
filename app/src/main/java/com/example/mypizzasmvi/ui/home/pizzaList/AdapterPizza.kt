@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mypizzasmvi.R
 import com.example.mypizzasmvi.core.models.PizzaModel
+import com.example.mypizzasmvi.core.utils.loadImage
 import com.example.mypizzasmvi.core.utils.setOnSingleClickListener
 import com.example.mypizzasmvi.core.utils.toMoneyFormat
 import kotlinx.android.synthetic.main.item_list_pizza.view.*
@@ -50,6 +51,7 @@ class AdapterPixWithBank (
             view.txtNamePizza.text = pizza.name
             view.txtPriceValue.text = pizza.priceP.toMoneyFormat()
             view.rattingBarPizza.rating = pizza.rating
+            loadImage(pizza.imageUrl,view.imageViewPizza)
             view.item_list_pizza_card.setOnSingleClickListener {
                 onClick(pizza)
             }
