@@ -3,6 +3,7 @@ package com.example.mypizzasmvi.core.utils
 import android.app.Dialog
 import android.content.Context
 import android.graphics.drawable.Drawable
+import android.view.LayoutInflater
 import android.view.View
 import android.view.Window
 import android.view.WindowManager
@@ -12,9 +13,9 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import com.example.mypizzasmvi.R
+import com.example.mypizzasmvi.databinding.LayoutDialogErrorBinding
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.layout_dialog_error.*
 import java.text.NumberFormat
 import java.util.*
 
@@ -74,21 +75,22 @@ fun openBottomDialog(
     onFinish: () -> Unit = {},
 ): Dialog {
     val dialog = BottomSheetDialog(context, R.style.BottomSheetDialogTheme)
-    dialog.setContentView(R.layout.layout_dialog_error)
-    dialog.image_view_dialog_error.setImageDrawable(drawable)
+    val binding : LayoutDialogErrorBinding = LayoutDialogErrorBinding.inflate(LayoutInflater.from(context))
+    dialog.setContentView(binding.root)
+    binding.imageViewDialogError.setImageDrawable(drawable)
     dialog.show()
     dialog.setCanceledOnTouchOutside(false)
     dialog.setOnDismissListener { onFinish() }
-    dialog.text_view_title_dialog_error.text = dialogData.title
-    dialog.text_view_sub_title_dialog_error.text = dialogData.description
-    dialog.button_dialog_error.text = dialogData.textButton
-    dialog.button_dialog_error.visibility = View.VISIBLE
+    binding.textViewTitleDialogError.text = dialogData.title
+    binding.textViewSubTitleDialogError.text = dialogData.description
+    binding.buttonDialogError.text = dialogData.textButton
+    binding.buttonDialogError.visibility = View.VISIBLE
 
-    dialog.image_view_close_dialog_error.setOnSingleClickListener {
+    binding.imageViewCloseDialogError.setOnSingleClickListener {
         onClose()
         dialog.dismiss()
     }
-    dialog.button_dialog_error.setOnSingleClickListener {
+    binding.buttonDialogError.setOnSingleClickListener {
         onClickButton()
         dialog.dismiss()
     }
