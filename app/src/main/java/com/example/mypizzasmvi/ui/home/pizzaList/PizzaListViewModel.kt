@@ -14,7 +14,6 @@ class PizzaListViewModel (
 ) : MviStateViewModel<PizzaListState>() {
 
     //TODO tratar para salvar lista e não refazer requisição
-
     fun getListPizza() = viewModelScope.launch(Dispatchers.Default) {
         emit(PizzaListState.Loading)
         val response = doRequest()

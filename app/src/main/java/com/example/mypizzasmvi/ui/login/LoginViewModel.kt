@@ -1,6 +1,5 @@
 package com.example.mypizzasmvi.ui.login
 
-
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -13,7 +12,6 @@ import com.example.mypizzasmvi.core.utils.combineLatest
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-
 
 class LoginViewModel(
     private val service: Services

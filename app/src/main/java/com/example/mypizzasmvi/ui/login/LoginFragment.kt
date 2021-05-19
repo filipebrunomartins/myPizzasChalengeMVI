@@ -13,20 +13,21 @@ import com.example.mypizzasmvi.core.models.LoginResponse
 import com.example.mypizzasmvi.core.utils.lockScreen
 import com.example.mypizzasmvi.core.utils.setOnSingleClickListener
 import com.example.mypizzasmvi.core.utils.showMessageError
+import com.example.mypizzasmvi.databinding.FragmentLoginBinding
 import com.example.mypizzasmvi.ui.home.HomeActivity
-import kotlinx.android.synthetic.main.fragment_login.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class LoginFragment : MviStateFragment<LoginState>() {
 
+    private lateinit var binding: FragmentLoginBinding
     override val viewModel: LoginViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_login, container, false)
+    ): View {
+        binding = FragmentLoginBinding.inflate(inflater,container,false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -37,26 +38,26 @@ class LoginFragment : MviStateFragment<LoginState>() {
     }
 
     private fun setupViews() {
-        button_progress.setOnSingleClickListener {
-            viewModel.postLogin(user_text.text.toString(),password_text.text.toString())
+        binding.buttonProgress.setOnSingleClickListener {
+            viewModel.postLogin(binding.userText.text.toString(),binding.passwordText.text.toString())
         }
     }
 
     private fun setupObservers(){
 
-        user_text.doOnTextChanged { text, _, _, _ ->
+        binding.userText.doOnTextChanged { text, _, _, _ ->
             if (!text.isNullOrEmpty()) {
                 viewModel.userLiveData.postValue(true)
             }else viewModel.userLiveData.postValue(false)
         }
-        password_text.doOnTextChanged { text, _, _, _ ->
+        binding.passwordText.doOnTextChanged { text, _, _, _ ->
             if (!text.isNullOrEmpty()) {
                 viewModel.passwordLiveData.postValue(true)
             }else viewModel.passwordLiveData.postValue(false)
         }
 
         viewModel.buttonLiveData.observe(viewLifecycleOwner, Observer { enable ->
-            button_progress.isEnabled = enable
+            binding.buttonProgress.isEnabled = enable
         })
 
     }
@@ -82,15 +83,15 @@ class LoginFragment : MviStateFragment<LoginState>() {
 
     private fun showLoading(){
         lockScreen(true)
-        button_progress.isEnabled = false
-        text_button.visibility = View.GONE
-        progress_button.visibility = View.VISIBLE
+        binding.buttonProgress.isEnabled = false
+        binding.textButton.visibility = View.GONE
+        binding.progressButton.visibility = View.VISIBLE
     }
 
     private fun hidingLoading(){
         lockScreen(false)
-        button_progress.isEnabled = true
-        text_button.visibility = View.VISIBLE
-        progress_button.visibility = View.GONE
+        binding.buttonProgress.isEnabled = true
+        binding.textButton.visibility = View.VISIBLE
+        binding.progressButton.visibility = View.GONE
     }
 }

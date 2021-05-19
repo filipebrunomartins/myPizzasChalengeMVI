@@ -2,15 +2,13 @@ package com.example.mypizzasmvi.ui.home.pizzaList
 
 import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.mypizzasmvi.R
 import com.example.mypizzasmvi.core.models.PizzaModel
 import com.example.mypizzasmvi.core.utils.loadImage
 import com.example.mypizzasmvi.core.utils.setOnSingleClickListener
 import com.example.mypizzasmvi.core.utils.toMoneyFormat
-import kotlinx.android.synthetic.main.item_list_pizza.view.*
+import com.example.mypizzasmvi.databinding.ItemListPizzaBinding
 
 class AdapterPixWithBank (
     private val ctx: Context,
@@ -18,6 +16,7 @@ class AdapterPixWithBank (
     private val onClick: (PizzaModel) -> Unit
 ) : RecyclerView.Adapter<AdapterPixWithBank.PixWithBankViewHolder>(){
 
+    private lateinit var binding: ItemListPizzaBinding
     private var query: String? = null
     private var filteredDataSet: List<PizzaModel> = listOf()
 
@@ -34,25 +33,24 @@ class AdapterPixWithBank (
         notifyDataSetChanged()
     }
 
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PixWithBankViewHolder {
-        return PixWithBankViewHolder(LayoutInflater.from(ctx).inflate(R.layout.item_list_pizza, parent, false),onClick)
+        binding = ItemListPizzaBinding.inflate(LayoutInflater.from(ctx), parent, false)
+        return PixWithBankViewHolder(binding,onClick)
     }
 
     override fun getItemCount() = filteredDataSet.size
-
 
     override fun onBindViewHolder(holder: AdapterPixWithBank.PixWithBankViewHolder, position: Int) {
         holder.bind(filteredDataSet[position])
     }
 
-    inner class PixWithBankViewHolder(private val view : View, val onClick: (PizzaModel) -> Unit) : RecyclerView.ViewHolder(view) {
+    inner class PixWithBankViewHolder(binding: ItemListPizzaBinding, val onClick: (PizzaModel) -> Unit) : RecyclerView.ViewHolder(binding.root) {
         fun bind(pizza: PizzaModel) {
-            view.txtNamePizza.text = pizza.name
-            view.txtPriceValue.text = pizza.priceP.toMoneyFormat()
-            view.rattingBarPizza.rating = pizza.rating
-            loadImage(pizza.imageUrl,view.imageViewPizza)
-            view.item_list_pizza_card.setOnSingleClickListener {
+            binding.txtNamePizza.text = pizza.name
+            binding.txtPriceValue.text = pizza.priceP.toMoneyFormat()
+            binding.rattingBarPizza.rating = pizza.rating
+            loadImage(pizza.imageUrl,binding.imageViewPizza)
+            binding.itemListPizzaCard.setOnSingleClickListener {
                 onClick(pizza)
             }
         }

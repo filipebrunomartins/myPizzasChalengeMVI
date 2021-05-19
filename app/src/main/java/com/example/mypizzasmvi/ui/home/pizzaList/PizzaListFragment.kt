@@ -4,18 +4,19 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.widget.addTextChangedListener
 import androidx.navigation.fragment.findNavController
+import androidx.core.widget.addTextChangedListener
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mvi.MviStateFragment
 import com.example.mypizzasmvi.R
 import com.example.mypizzasmvi.core.models.PizzaModel
 import com.example.mypizzasmvi.core.utils.showMessageError
-import kotlinx.android.synthetic.main.fragment_list_pizza.*
+import com.example.mypizzasmvi.databinding.FragmentListPizzaBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class PizzaListFragment: MviStateFragment<PizzaListState>() {
 
+    private lateinit var binding: FragmentListPizzaBinding
     override val viewModel: PizzaListViewModel by viewModel()
 
     private val navigation get() = findNavController()
@@ -25,9 +26,9 @@ class PizzaListFragment: MviStateFragment<PizzaListState>() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_list_pizza, container, false)
+    ): View {
+        binding = FragmentListPizzaBinding.inflate(inflater,container,false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -41,7 +42,6 @@ class PizzaListFragment: MviStateFragment<PizzaListState>() {
         viewModel.getListPizza()
     }
 
-
     override fun render(state: PizzaListState) = when(state) {
         is PizzaListState.Error -> renderError(state.message)
         is PizzaListState.Success -> renderSuccess(state.listPizza)
@@ -49,27 +49,27 @@ class PizzaListFragment: MviStateFragment<PizzaListState>() {
     }
 
     private fun setupObservers(){
-        editTextSearchPizza.addTextChangedListener{
+        binding.editTextSearchPizza.addTextChangedListener{
             try { adapter.filter(it.toString())
             }catch (e : Exception){ e.printStackTrace() }
         }
     }
 
     private fun showLoading() {
-        recyclerViewPixBank.visibility = View.GONE
-        progressPizza.visibility = View.VISIBLE
+        binding.recyclerViewPixBank.visibility = View.GONE
+        binding.progressPizza.visibility = View.VISIBLE
     }
 
     private fun hideLoading() {
-        recyclerViewPixBank.visibility = View.VISIBLE
-        progressPizza.visibility = View.GONE
+        binding.recyclerViewPixBank.visibility = View.VISIBLE
+        binding.progressPizza.visibility = View.GONE
     }
 
     private fun renderSuccess(loginResponse: List<PizzaModel>) {
         adapter = AdapterPixWithBank(requireContext(), loginResponse, ::navigateDetailsPizza)
         adapter.filter(null)
-        recyclerViewPixBank.layoutManager = LinearLayoutManager(requireContext())
-        recyclerViewPixBank.adapter = adapter
+        binding.recyclerViewPixBank.layoutManager = LinearLayoutManager(requireContext())
+        binding.recyclerViewPixBank.adapter = adapter
         hideLoading()
     }
 
@@ -86,5 +86,4 @@ class PizzaListFragment: MviStateFragment<PizzaListState>() {
             e.printStackTrace()
         }
     }
-
 }

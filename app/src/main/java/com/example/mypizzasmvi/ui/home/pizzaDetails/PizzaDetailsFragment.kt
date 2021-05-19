@@ -12,18 +12,19 @@ import com.example.mypizzasmvi.R
 import com.example.mypizzasmvi.core.utils.loadImage
 import com.example.mypizzasmvi.core.utils.setOnSingleClickListener
 import com.example.mypizzasmvi.core.utils.toMoneyFormat
-import kotlinx.android.synthetic.main.fragment_details_pizza.*
+import com.example.mypizzasmvi.databinding.FragmentDetailsPizzaBinding
 
 class PizzaDetailsFragment : Fragment() {
 
+    private lateinit var binding: FragmentDetailsPizzaBinding
     private val args by navArgs<PizzaDetailsFragmentArgs>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_details_pizza, container, false)
+    ): View {
+        binding = FragmentDetailsPizzaBinding.inflate(inflater,container,false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -32,14 +33,14 @@ class PizzaDetailsFragment : Fragment() {
     }
 
     private fun setupPizzaDetails() {
-        rattingBarPizza.rating = args.pizzaModel.rating
-        loadImage(args.pizzaModel.imageUrl,imageViewPizzaDetail)
-        textViewNamePizza.text = args.pizzaModel.name
-        textViewValuePizza.text = args.pizzaModel.priceP.toMoneyFormat()
-        buttonSizeP.background = ResourcesCompat.getDrawable(resources, R.drawable.modal_button_size_pizza_selected, null)
-        buttonSizeP.setTextColor(ResourcesCompat.getColor(resources, R.color.white, null))
+        binding.rattingBarPizza.rating = args.pizzaModel.rating
+        loadImage(args.pizzaModel.imageUrl,binding.imageViewPizzaDetail)
+        binding.textViewNamePizza.text = args.pizzaModel.name
+        binding.textViewValuePizza.text = args.pizzaModel.priceP.toMoneyFormat()
+        binding.buttonSizeP.background = ResourcesCompat.getDrawable(resources, R.drawable.modal_button_size_pizza_selected, null)
+        binding.buttonSizeP.setTextColor(ResourcesCompat.getColor(resources, R.color.white, null))
 
-        textViewBuyPizza.setOnSingleClickListener {
+        binding.textViewBuyPizza.setOnSingleClickListener {
             Toast.makeText(requireContext(),"teste",Toast.LENGTH_SHORT).show()
         }
     }
