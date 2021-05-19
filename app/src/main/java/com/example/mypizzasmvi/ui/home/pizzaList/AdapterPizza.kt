@@ -16,7 +16,6 @@ class AdapterPixWithBank (
     private val onClick: (PizzaModel) -> Unit
 ) : RecyclerView.Adapter<AdapterPixWithBank.PixWithBankViewHolder>(){
 
-    private lateinit var binding: ItemListPizzaBinding
     private var query: String? = null
     private var filteredDataSet: List<PizzaModel> = listOf()
 
@@ -34,7 +33,7 @@ class AdapterPixWithBank (
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PixWithBankViewHolder {
-        binding = ItemListPizzaBinding.inflate(LayoutInflater.from(ctx), parent, false)
+        val binding = ItemListPizzaBinding.inflate(LayoutInflater.from(ctx), parent, false)
         return PixWithBankViewHolder(binding,onClick)
     }
 
@@ -44,13 +43,13 @@ class AdapterPixWithBank (
         holder.bind(filteredDataSet[position])
     }
 
-    inner class PixWithBankViewHolder(binding: ItemListPizzaBinding, val onClick: (PizzaModel) -> Unit) : RecyclerView.ViewHolder(binding.root) {
+    inner class PixWithBankViewHolder(private val itemBinding: ItemListPizzaBinding, val onClick: (PizzaModel) -> Unit) : RecyclerView.ViewHolder(itemBinding.root) {
         fun bind(pizza: PizzaModel) {
-            binding.txtNamePizza.text = pizza.name
-            binding.txtPriceValue.text = pizza.priceP.toMoneyFormat()
-            binding.rattingBarPizza.rating = pizza.rating
-            loadImage(pizza.imageUrl,binding.imageViewPizza)
-            binding.itemListPizzaCard.setOnSingleClickListener {
+            itemBinding.txtNamePizza.text = pizza.name
+            itemBinding.txtPriceValue.text = pizza.priceP.toMoneyFormat()
+            itemBinding.rattingBarPizza.rating = pizza.rating
+            loadImage(pizza.imageUrl,itemBinding.imageViewPizza)
+            itemBinding.itemListPizzaCard.setOnSingleClickListener {
                 onClick(pizza)
             }
         }
