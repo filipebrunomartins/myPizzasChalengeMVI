@@ -6,6 +6,157 @@
     android:id="@+id/root_layout_fragment_login"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black">
+    android:background="@color/grey_1">
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nested_scroll_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_constraintBottom_toTopOf="@+id/viewButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/grey_1">
+
+            <ImageView
+                android:id="@+id/imageViewPizzaDetail"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:scaleType="centerCrop"
+                app:layout_constraintBottom_toTopOf="@+id/guideline1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@drawable/pizza_example_1" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.65" />
+
+            <TextView
+                android:id="@+id/textViewNamePizza"
+                style="@style/Text_Title_White"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="24dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="24dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageViewPizzaDetail"
+                tools:text="Nome da pizza" />
+
+            <RatingBar
+                android:id="@+id/rattingBarPizza"
+                style="@style/Widget.AppCompat.RatingBar.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:numStars="5"
+                android:progressBackgroundTint="@color/white"
+                android:progressTint="@color/yellow"
+                android:rating="5"
+                android:secondaryProgressTint="@color/yellow"
+                android:stepSize="0.1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewNamePizza" />
+
+            <TextView
+                android:id="@+id/textViewSizePizza"
+                style="@style/Text_Title_White"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="8dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="24dp"
+                android:text="@string/chose_size_pizza"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/rattingBarPizza" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/buttonSizeP"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/modal_button_size_pizza"
+                android:text="@string/text_size_p"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toStartOf="@+id/buttonSizeM"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textViewSizePizza" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/buttonSizeM"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/modal_button_size_pizza"
+                android:text="@string/text_size_m"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toStartOf="@+id/buttonSizeG"
+                app:layout_constraintStart_toEndOf="@+id/buttonSizeP"
+                app:layout_constraintTop_toBottomOf="@id/textViewSizePizza" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/buttonSizeG"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/modal_button_size_pizza"
+                android:text="@string/text_size_g"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/buttonSizeM"
+                app:layout_constraintTop_toBottomOf="@id/textViewSizePizza" />
+
+            <TextView
+                android:id="@+id/textViewValuePizza"
+                style="@style/Text_Title_White"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="16dp"
+                android:gravity="center"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/buttonSizeM"
+                tools:text="R$ 29,90" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <View
+        android:id="@+id/viewButton"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="@color/green_1"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textViewBuyPizza"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto_black"
+        android:text="@string/text_buy_pizza"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@id/viewButton"
+        app:layout_constraintEnd_toEndOf="@id/viewButton"
+        app:layout_constraintStart_toStartOf="@id/viewButton"
+        app:layout_constraintTop_toTopOf="@id/viewButton" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

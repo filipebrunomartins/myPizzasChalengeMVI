@@ -13,4 +13,11 @@
     <!-- List Pizza-->
     <string name="filter_hint">Procurar</string>
     <string name="text_choose_flavor">Escolha seu sabor</string>
+
+    <!-- Pizza Details-->
+    <string name="chose_size_pizza">Escolha o tamanho</string>
+    <string name="text_size_p">P</string>
+    <string name="text_size_m">M</string>
+    <string name="text_size_g">G</string>
+    <string name="text_buy_pizza">Comprar</string>
 </resources>
